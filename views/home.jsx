@@ -6,6 +6,18 @@ function home(){
       <Def>
         <main>
           <h1>HOME</h1>
+          <div>
+            <img
+              src="public\images\chia-fruit-drink.jpg"
+              alt="Chia Fruit Shake"
+            />
+            <div>
+              Photo by{" "}
+              <a href="https://unsplash.com/photos/MsTOg6rhRVk">
+                Brenda Godinez
+              </a>
+            </div>
+          </div>
           <a href="/places">
             <button className="btn-primary">Places Page</button>
           </a>
