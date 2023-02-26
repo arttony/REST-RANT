@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const places = require('../models/places.js')
 
+//create
 router.post("/", (req, res) => {
   if (!req.body.pic) {
     console.log(req.body)
@@ -17,7 +18,7 @@ router.post("/", (req, res) => {
   res.redirect("/places");
 });
 
-
+// new
 router.get('/new', (req, res) => {
   res.render('places/new')
 })
@@ -28,6 +29,7 @@ router.get('/', (req,res) => {
     }
 )
 
+//show
 router.get("/:id", (req, res) => {
   let id = Number(req.params.id);
   if (isNaN(id)) {
@@ -39,6 +41,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
+// delete
 router.delete("/:id", (req, res) => {
   let id = Number(req.params.id);
   if (isNaN(id)) {
@@ -51,6 +54,17 @@ router.delete("/:id", (req, res) => {
   }
 });
 
-
+//edit
+router.get('/:id/edit', (req, res) => {
+  let id = Number(req.params.id);
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    res.render('places/edit', {place: places[id]})
+  }
+  
+})
 
 module.exports = router
