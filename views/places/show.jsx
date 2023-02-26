@@ -28,14 +28,14 @@ function show(data) {
           <p>Currently Unrated</p>
           <h2>Comments</h2>
           <p>No comments Yet!</p>
-        <a href={`/places/${data.id}/edit`} className="btn btn-warning">
-          Edit
-        </a>
-        <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
-          <button type="submit" className="btn btn-danger">
-            Delete
-          </button>
-        </form>
+          <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+            Edit
+          </a>
+          <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+            <button type="submit" className="btn btn-danger">
+              Delete
+            </button>
+          </form>
         </div>
       </main>
     </Def>
