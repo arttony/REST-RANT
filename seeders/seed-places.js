@@ -1,4 +1,4 @@
-const db = require('./models')
+const db = require('../models')
 
 db.Place.create([
   {
@@ -16,8 +16,7 @@ db.Place.create([
     cuisines: "Coffee, Bakery",
     pic: "../images/cat-coffee.jpg",
     founded: 2020
-  },
-])
+}])
 .then(() => {
     console.log('Success!')
     process.exit()
