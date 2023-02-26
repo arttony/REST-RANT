@@ -6,7 +6,7 @@ db.Place.create([
     city: "Seattle",
     state: "WA",
     cuisines: "Thai, Pan-Asian",
-    pic: "./images/thai-tea.jpg",
+    pic: "../images/thai-tea.jpg",
     founded: 1989
   },
   {
