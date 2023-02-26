@@ -1,15 +1,31 @@
 const router = require('express').Router()
-const places = require('../models/places.js')
+//const places = require('../models/places.js')
+const db = require('../models')
+
 //index
 router.get('/', (req,res) => { 
-    
+    db.Place.find()
+    .then((places) => {
       res.render('places/index', {places})
+    })
+    .catch(err => {
+      console.log(err)
+      res.render('error404')
+    })
     }
 )
 
 //create
 router.post("/", (req, res) => {
-  if (!req.body.pic) {
+  db.Place.create(req.body)
+  .then(() => {
+    res.redirect('/places')
+  })
+  .catch(err => {
+    console.log('err', err)
+    res.render('error404')
+  })
+  /* if (!req.body.pic) {
     console.log(req.body)
     // Default image if one is not provided
     req.body.pic = "http://placekitten.com/400/400";
@@ -21,7 +37,7 @@ router.post("/", (req, res) => {
     req.body.state = "USA";
   }
   places.push(req.body)
-  res.redirect("/places");
+  res.redirect("/places"); */
 });
 
 // new
@@ -31,14 +47,22 @@ router.get('/new', (req, res) => {
 
 //show
 router.get("/:id", (req, res) => {
-  let id = Number(req.params.id);
+  db.Place.findById(req.params.id)
+  .then(place => {
+    res.render('places/show', {place})
+  })
+  .catch(err => {
+    console.log('err', err)
+    res.render('error404')
+  })
+  /* let id = Number(req.params.id);
   if (isNaN(id)) {
     res.render("error404");
   } else if (!places[id]) {
     res.render("error404");
   } else {
     res.render("places/show", { place: places[id], id });
-  }
+  } */
 });
 
 // delete
