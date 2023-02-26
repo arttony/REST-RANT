@@ -9,7 +9,7 @@ function home(){
           <h1>HOME</h1>
           <div>
             <img
-              src='./public/images/chia-fruit-drink.jpg'
+              src='./images/chia-fruit-drink.jpg'
               alt="Chia Fruit Shake"
             />
             <div>
