@@ -142,9 +142,8 @@ router.post('/:id/comment', (req, res) => {
     db.Comment.create(req.body)
     .then(comment => {
       place.comments.push(comment.id)
-      place.save()
-      .then(() => {
-        res.redirect(`/places/${res.params.id}`)
+      place.save().then(() => {
+        res.redirect(`/places/${req.params.id}`)
       })
     })
     .catch(err => {

@@ -7,8 +7,24 @@ function show(data) {
       No comments yet!
     </h3>
   )
+
+  let rating = (
+    <h3 className="inactive">
+      Not yet rated
+    </h3>
+  )
+
   if (data.place.comments.length) {
     comments = data.place.comments.map((c) => {
+      let sumRatings = data.place.commments.reduce((tot, c) => {
+      return tot + c.stars
+    }, 0)
+      let averageRating = sumRatings / data.place.comments.length
+      rating = (
+        <h3>
+          {averageRating} stars
+        </h3>
+      )
       return (
         <div className="border">
           <h2 className="rant">{c.rant ? "Rant! ðŸ˜¡" : "Rave! ðŸ˜»"}</h2>
@@ -38,6 +54,8 @@ function show(data) {
             <h4>Serving {data.place.cuisines}</h4>
           </div>
           <h2>Rating</h2>
+          {rating}
+          <br/>
           <p>Currently Unrated</p>
           <hr />
           <h2>Comments</h2>
@@ -54,25 +72,23 @@ function show(data) {
           <form method="POST" action={`/places/${data.place.id}/comment`}>
             <div className="form-group">
               <label htmlFor="author">Author</label>
-              <input className="form-control" id="author" name="author" />
+              <input type="text" className="form-control" id="author" name="author" />
             </div>
-            <div className="form-group">
-              <label htmlFor="content">Comments</label>
-              <input className="form-control" id="content" name="content" />
-            </div>
+      
             <div className="form-group">
               <label htmlFor="stars">Star Rating</label>
               <input
                 type="range"
                 className="form-control"
-                id="starRating"
-                name="starRating"
+                id="stars"
+                name="stars"
                 step="0.5"
                 min="0"
                 max="5"
                 required
               />
             </div>
+            
             <div >
               <label htmlFor="rant">Rant?!</label>
               <input
@@ -83,6 +99,12 @@ function show(data) {
                 value="rant"
               />
             </div>
+            
+            <div className="form-group">
+              <label htmlFor="content">Comments</label>
+              <input type="text-area" className="form-control" id="content" name="content" />
+            </div>
+            
             <button
               className="btn btn-primary"
               type="submit"
