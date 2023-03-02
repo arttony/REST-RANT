@@ -15,6 +15,7 @@ router.get('/', (req,res) => {
     }
 )
 
+
 //create
 router.post("/", (req, res) => {
   db.Place.create(req.body)
@@ -59,7 +60,9 @@ router.get('/new', (req, res) => {
 //show
 router.get("/:id", (req, res) => {
   db.Place.findById(req.params.id)
+  .populate('comments')
   .then(place => {
+    console.log(place.comments)
     res.render('places/show', {place})
   })
   .catch(err => {
@@ -75,6 +78,8 @@ router.get("/:id", (req, res) => {
     res.render("places/show", { place: places[id], id });
   } */
 });
+
+
 
 // delete
 router.delete("/:id", (req, res) => {
@@ -127,5 +132,41 @@ router.get('/:id/edit', (req, res) => {
   }
   
 })
+
+// create comment
+router.post('/:id/comment', (req, res) => {
+  console.log(req.body)
+  req.body.rant = req.body.rant ? true : false;
+  db.Place.findById(req.params.id)
+  .then(place => {
+    db.Comment.create(req.body)
+    .then(comment => {
+      place.comments.push(comment.id)
+      place.save()
+      .then(() => {
+        res.redirect(`/places/${res.params.id}`)
+      })
+    })
+    .catch(err => {
+      res.render('error404')
+    })
+  })
+  .catch(err => {
+    res.render('error404')
+  })
+  //res.send('GET /places/:id/comment stub')
+})
+
+//write comment
+/* router.get('/:id/comment', (req, res) => {
+  let id = Number(req.params.id)
+  if(isNaN(id)){
+    res.render('error404')
+  } else if (!places[id]){
+    res.render('error404')
+  } else {
+    res.render(`/places/${res.params.id}/comment`);
+  }
+}) */
 
 module.exports = router

@@ -4,7 +4,11 @@ const Def = require("../default");
 function new_form(data) {
   let message = " ";
   if (data.message) {
-    message = (<h4 className="alert-danger">{data.message}</h4>);
+    message = (
+    <h4 className="alert-danger">
+      {data.message}
+      </h4>
+    );
   }
     return (
       <Def>
@@ -38,7 +42,7 @@ function new_form(data) {
               />
             </div>
             <div className="form-group">
-              <label for="founded">Founded Year</label>
+              <label htmlFor="founded">Founded Year</label>
               <input type="number" className="form-control" id="founded" name="founded" value={new Date().getFullYear()} />
             </div>
             <input
