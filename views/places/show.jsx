@@ -16,13 +16,17 @@ function show(data) {
 
   if (data.place.comments.length) {
     comments = data.place.comments.map((c) => {
-      let sumRatings = data.place.commments.reduce((tot, c) => {
-      return tot + c.stars
-    }, 0)
-      let averageRating = sumRatings / data.place.comments.length
+      let sumRatings = data.place.comments.reduce((tot, c) => {
+        return tot + c.stars
+      }, 0)
+      let averageRating = Math.round(sumRatings / data.place.comments.length)
+      let stars = ''
+      for (let i =0 ; i < averageRating; i++){
+        stars += '­ï¸'
+      }
       rating = (
         <h3>
-          {averageRating} stars
+          {stars} stars
         </h3>
       )
       return (
@@ -93,8 +97,6 @@ function show(data) {
               <label htmlFor="rant">Rant?!</label>
               <input
                 type="checkbox"
-                className="form-control"
-                id="rant"
                 name="rant"
                 value="rant"
               />
