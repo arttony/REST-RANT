@@ -79,21 +79,6 @@ router.get("/:id", (req, res) => {
   } */
 });
 
-
-
-// delete
-router.delete("/:id", (req, res) => {
-  db.Place.findByIdAndDelete(req.params.id)
-    .then((place) => {
-      res.redirect("/places");
-    })
-    .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
-    });
-});
-
-
 //put
 router.put("/:id", (req, res) => {
   db.Place.findByIdAndUpdate(req.params.id, req.body)
@@ -106,7 +91,6 @@ router.put("/:id", (req, res) => {
     });
 });
 
-
 //edit
 router.get("/:id/edit", (req, res) => {
   db.Place.findById(req.params.id)
@@ -118,6 +102,15 @@ router.get("/:id/edit", (req, res) => {
     });
 });
 
+// delete
+router.delete("/:id", (req, res) => {
+  db.Place.findByIdAndDelete(req.params.id)
+    .then((place) => res.redirect("/places"))
+    .catch((err) => {
+      console.log(err);
+      res.status(404).render("error404");
+    });
+});
 
 // create comment
 router.post('/:id/comment', (req, res) => {

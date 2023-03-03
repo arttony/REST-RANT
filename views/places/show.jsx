@@ -67,13 +67,13 @@ function show(data) {
           <a href={`/places/${data.id}/edit`} className="btn btn-warning">
             Edit
           </a>
-          <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+          <form method="POST" action={`/places/${data._id}?_method=DELETE`}>
             <button type="submit" className="btn btn-danger">
               Delete
             </button>
           </form>
 
-          <form method="POST" action={`/places/${data.place.id}/comment`}>
+          <form method="POST" action={`/places/${data.place._id}/comment`}>
             <div className="form-group">
               <label htmlFor="author">Author</label>
               <input type="text" className="form-control" id="author" name="author" />
